@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>AFTERIMAGE</title>
 
     <link rel="stylesheet" type="text/css" href="./style.css">
@@ -11,13 +12,97 @@
 
 <body>
 
+    <header>
+        <div class="logo">AFTERIMAGE</div>
+
+        <nav>
+            <a href="#archive">ARCHIVE</a>
+            <a href="#submit">SUBMIT</a>
+            <a href="#science">SCIENCE</a>
+        </nav>
+    </header>
+
+
     <main>
-        <h1>AFTERIMAGE</h1>
 
-        <p class="tagline">An anonymous archive of human memory.</p>
+        <section class="hero">
 
-        <p class="question">What stays with us after the moment is gone?</p>
+            <p class="eyebrow">AN ANONYMOUS ARCHIVE OF HUMAN MEMORY</p>
+
+            <h1>AFTERIMAGE</h1>
+
+            <p class="intro">
+                What stays with us after the moment is gone?
+            </p>
+
+        </section>
+
+
+        <section id="submit" class="submit-section">
+
+            <p class="section-label">01 / LEAVE A MEMORY</p>
+
+            <h2 id="question">
+                Loading a question...
+            </h2>
+
+            <p class="instruction">
+                Answer anonymously. There are no right answers.
+            </p>
+
+            <textarea
+                id="memory"
+                placeholder="Write whatever comes to mind..."
+                maxlength="2000">
+            </textarea>
+
+            <div class="submit-row">
+
+                <span id="character-count">0 / 2000</span>
+
+                <button id="submit-button">
+                    SUBMIT MEMORY →
+                </button>
+
+            </div>
+
+            <p id="message"></p>
+
+        </section>
+
+
+        <section id="archive" class="placeholder-section">
+
+            <p class="section-label">02 / THE ARCHIVE</p>
+
+            <h2>
+                A collection of memories,
+                preserved anonymously.
+            </h2>
+
+        </section>
+
+
+        <section id="science" class="placeholder-section">
+
+            <p class="section-label">03 / THE SCIENCE</p>
+
+            <h2>
+                Why do we remember
+                what we remember?
+            </h2>
+
+        </section>
+
     </main>
+
+
+    <footer>
+        AFTERIMAGE — A STUDY OF MEMORY & PERCEPTION
+    </footer>
+
+
+    <script src="./script.js"></script>
 
 </body>
 

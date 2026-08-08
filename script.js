@@ -99,46 +99,39 @@ submitButton.addEventListener("click", async function() {
     const memory = memoryBox.value.trim();
 
     if (memory === "") {
-
-        message.textContent =
-            "Write something before submitting.";
-
+        message.textContent = "Write something before submitting.";
         return;
     }
 
     submitButton.disabled = true;
     submitButton.textContent = "SENDING...";
 
+    const formData = new URLSearchParams();
 
-    const question =
-        questionElement.textContent;
+    formData.append(
+        "question",
+        questionElement.textContent
+    );
 
-
-    // Put the information into the request URL
-    const submissionURL =
-        scriptURL +
-        "?question=" +
-        encodeURIComponent(question) +
-        "&memory=" +
-        encodeURIComponent(memory);
-
+    formData.append(
+        "memory",
+        memory
+    );
 
     try {
 
-        await fetch(submissionURL, {
+        await fetch(scriptURL, {
             method: "POST",
-            mode: "no-cors"
+            mode: "no-cors",
+            body: formData
         });
-
 
         message.textContent =
             "Your memory has been added to the archive.";
 
         memoryBox.value = "";
 
-        characterCount.textContent =
-            "0 / 2000";
-
+        characterCount.textContent = "0 / 2000";
 
     } catch (error) {
 
@@ -146,13 +139,9 @@ submitButton.addEventListener("click", async function() {
             "Something went wrong. Please try again.";
 
         console.error(error);
-
     }
 
-
     submitButton.disabled = false;
-
-    submitButton.textContent =
-        "SUBMIT MEMORY →";
+    submitButton.textContent = "SUBMIT MEMORY →";
 
 });

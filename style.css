@@ -10,16 +10,12 @@ body {
     min-height: 100vh;
 }
 
-
-/* =========================
-   HEADER
-========================= */
+/* HEADER */
 
 header {
     max-width: 1100px;
     margin: 0 auto;
     padding: 30px 40px;
-
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,7 +24,6 @@ header {
 .logo {
     color: #171717;
     text-decoration: none;
-
     font-family: Arial, Helvetica, sans-serif;
     font-size: 12px;
     font-weight: 700;
@@ -43,13 +38,10 @@ nav {
 nav a {
     color: #171717;
     text-decoration: none;
-
     font-family: Arial, Helvetica, sans-serif;
     font-size: 10px;
     letter-spacing: 0.15em;
-
     opacity: 0.5;
-
     transition: opacity 0.2s ease;
 }
 
@@ -57,10 +49,7 @@ nav a:hover {
     opacity: 1;
 }
 
-
-/* =========================
-   MAIN
-========================= */
+/* MAIN */
 
 main {
     max-width: 1100px;
@@ -68,10 +57,11 @@ main {
     padding: 80px 40px;
 }
 
+/* HOMEPAGE */
 
-/* =========================
-   HOMEPAGE
-========================= */
+.hero {
+    padding: 80px 0 140px;
+}
 
 h1 {
     font-family: Arial, Helvetica, sans-serif;
@@ -82,31 +72,138 @@ h1 {
     font-weight: 700;
 }
 
-.tagline {
+.eyebrow {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    opacity: 0.5;
+    margin-bottom: 25px;
+}
+
+.intro {
     font-size: 28px;
     max-width: 600px;
     line-height: 1.3;
 }
 
-.question {
-    margin-top: 120px;
-    font-size: 18px;
-    max-width: 500px;
-    line-height: 1.6;
+/* SUBMISSION */
+
+.submit-section {
+    padding: 100px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-footer {
-    margin-top: 150px;
+.section-label {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
     letter-spacing: 0.15em;
     text-transform: uppercase;
+    opacity: 0.5;
 }
 
+.submit-section h2 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(30px, 5vw, 60px);
+    font-weight: normal;
+    line-height: 1.15;
+    max-width: 800px;
+    margin: 50px 0 20px;
+}
 
-/* =========================
-   ARCHIVE
-========================= */
+.instruction {
+    opacity: 0.55;
+    margin-bottom: 40px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 220px;
+    resize: vertical;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: transparent;
+    color: #171717;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 18px;
+    line-height: 1.5;
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #171717;
+}
+
+.submit-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+#character-count {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    opacity: 0.45;
+}
+
+#submit-button {
+    border: none;
+    background: #171717;
+    color: #f3f1eb;
+    padding: 14px 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+}
+
+#submit-button:hover {
+    opacity: 0.75;
+}
+
+#message {
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+/* HOMEPAGE SECTIONS */
+
+.placeholder-section {
+    padding: 100px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.placeholder-section h2 {
+    font-size: clamp(30px, 5vw, 60px);
+    font-weight: normal;
+    line-height: 1.15;
+    max-width: 700px;
+}
+
+/* ARCHIVE LINK */
+
+.archive-link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.archive-link:hover {
+    opacity: 0.55;
+}
+
+.archive-link h2 {
+    margin-bottom: 25px;
+}
+
+.archive-arrow {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+}
+
+/* ARCHIVE PAGE */
 
 .archive {
     max-width: 1100px;
@@ -117,13 +214,6 @@ footer {
 .archive-intro {
     max-width: 700px;
     margin-bottom: 100px;
-}
-
-.eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    opacity: 0.5;
-    margin-bottom: 25px;
 }
 
 .archive-intro h1 {
@@ -141,10 +231,7 @@ footer {
     opacity: 0.65;
 }
 
-
-/* =========================
-   MEMORY CARDS
-========================= */
+/* MEMORY CARDS */
 
 .memory-grid {
     display: grid;
@@ -156,13 +243,9 @@ footer {
     border: 1px solid rgba(0, 0, 0, 0.15);
     padding: 35px;
     min-height: 300px;
-
     display: flex;
     flex-direction: column;
-
-    transition:
-        transform 0.3s ease,
-        background 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .memory-card:hover {
@@ -170,7 +253,8 @@ footer {
 }
 
 .memory-question {
-    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     opacity: 0.45;
@@ -181,20 +265,18 @@ footer {
     font-family: Georgia, serif;
     font-size: 24px;
     line-height: 1.45;
-
     margin-top: auto;
     margin-bottom: 30px;
 }
 
 .anonymous {
-    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.08em;
     opacity: 0.45;
 }
 
-
-/* =========================
-   ARCHIVE FOOTER
-========================= */
+/* ARCHIVE FOOTER */
 
 .archive-footer {
     text-align: center;
@@ -212,17 +294,28 @@ footer {
     color: inherit;
     text-decoration: none;
     letter-spacing: 0.15em;
-    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
 }
 
 .archive-footer a:hover {
     opacity: 0.5;
 }
 
+/* FOOTER */
 
-/* =========================
-   MOBILE
-========================= */
+footer {
+    margin-top: 100px;
+    padding: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.5;
+    text-align: center;
+}
+
+/* MOBILE */
 
 @media (max-width: 700px) {
 
@@ -236,6 +329,15 @@ footer {
 
     main {
         padding: 60px 20px;
+    }
+
+    .hero {
+        padding: 60px 0 100px;
+    }
+
+    .submit-section,
+    .placeholder-section {
+        padding: 80px 0;
     }
 
     .archive {
@@ -252,5 +354,15 @@ footer {
 
     .memory-card {
         min-height: 260px;
+    }
+
+    .submit-row {
+        align-items: flex-start;
+        gap: 20px;
+        flex-direction: column;
+    }
+
+    #submit-button {
+        width: 100%;
     }
 }

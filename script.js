@@ -66,12 +66,13 @@ const questions = [
 
 // Pick a random question
 const randomIndex = Math.floor(Math.random() * questions.length);
+
 const questionElement = document.getElementById("question");
 
 questionElement.textContent = questions[randomIndex];
 
 
-// Get the form elements
+// Get form elements
 const memoryBox = document.getElementById("memory");
 const characterCount = document.getElementById("character-count");
 const submitButton = document.getElementById("submit-button");
@@ -80,12 +81,14 @@ const message = document.getElementById("message");
 
 // Character counter
 memoryBox.addEventListener("input", function() {
+
     characterCount.textContent =
         memoryBox.value.length + " / 2000";
+
 });
 
 
-// YOUR GOOGLE APPS SCRIPT URL
+// Google Apps Script URL
 const scriptURL =
     "https://script.google.com/macros/s/AKfycbwmIdLX70Mb1JCvqwobJS_AErbhvEqbUak6owPqHPvu_CwPnsdFDXyutujTb--d8XM/exec";
 
@@ -96,31 +99,52 @@ submitButton.addEventListener("click", async function() {
     const memory = memoryBox.value.trim();
 
     if (memory === "") {
-        message.textContent = "Write something before submitting.";
+
+        message.textContent =
+            "Write something before submitting.";
+
         return;
     }
 
     submitButton.disabled = true;
     submitButton.textContent = "SENDING...";
 
-    const data = {
-        question: questionElement.textContent,
-        memory: memory
-    };
+
+    // Create form data
+    const formData = new URLSearchParams();
+
+    formData.append(
+        "question",
+        questionElement.textContent
+    );
+
+    formData.append(
+        "memory",
+        memory
+    );
+
 
     try {
 
         await fetch(scriptURL, {
+
             method: "POST",
+
             mode: "no-cors",
-            body: JSON.stringify(data)
+
+            body: formData
+
         });
+
 
         message.textContent =
             "Your memory has been added to the archive.";
 
         memoryBox.value = "";
-        characterCount.textContent = "0 / 2000";
+
+        characterCount.textContent =
+            "0 / 2000";
+
 
     } catch (error) {
 
@@ -131,7 +155,10 @@ submitButton.addEventListener("click", async function() {
 
     }
 
+
     submitButton.disabled = false;
-    submitButton.textContent = "SUBMIT MEMORY →";
+
+    submitButton.textContent =
+        "SUBMIT MEMORY →";
 
 });

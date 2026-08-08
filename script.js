@@ -17,16 +17,12 @@ const questions = [
     "If a perfect copy of your mind were created, which one would be you?",
     "Where do you think a thought begins?",
     "Do you think consciousness is something the brain produces, or something we don't yet understand?",
-    "If you could watch your own mind from the outside, what would you want to see?",
     "What makes a person the same person from childhood to adulthood?",
 
     // TIME
     "Why does a year feel shorter when you're older?",
-    "If you could experience one moment of your life again exactly as it happened, which would you choose?",
     "Do you think the past still exists somewhere, or only in our memories?",
-    "If time stopped for everything except you, would you still experience time passing?",
     "Why does waiting for something make time feel slower?",
-    "If you could see one moment from the future, would you?",
     "Is the present actually a moment, or is it something our brains construct?",
 
     // SPACE
@@ -45,7 +41,6 @@ const questions = [
     "Would you rather know the truth about everything or keep some mysteries?",
     "Can something be real if nobody can observe it?",
     "What do you think makes a good life?",
-    "Would knowing the exact moment your life would end change how you live?",
     "Is being remembered important, or is experiencing life enough?",
     "Do humans discover meaning, or do we create it?",
 
@@ -69,46 +64,74 @@ const questions = [
 ];
 
 
-// Choose a random question
-
+// Pick a random question
 const randomIndex = Math.floor(Math.random() * questions.length);
-
 const questionElement = document.getElementById("question");
 
 questionElement.textContent = questions[randomIndex];
 
 
-// Character counter
-
+// Get the form elements
 const memoryBox = document.getElementById("memory");
-
 const characterCount = document.getElementById("character-count");
+const submitButton = document.getElementById("submit-button");
+const message = document.getElementById("message");
 
+
+// Character counter
 memoryBox.addEventListener("input", function() {
-
     characterCount.textContent =
         memoryBox.value.length + " / 2000";
-
 });
 
 
-// Submit button
+// YOUR GOOGLE APPS SCRIPT URL
+const scriptURL =
+    "https://script.google.com/macros/s/AKfycbwmIdLX70Mb1JCvqwobJS_AErbhvEqbUak6owPqHPvu_CwPnsdFDXyutujTb--d8XM/exec";
 
-const submitButton = document.getElementById("submit-button");
 
-const message = document.getElementById("message");
+// Submit the memory
+submitButton.addEventListener("click", async function() {
 
-submitButton.addEventListener("click", function() {
+    const memory = memoryBox.value.trim();
 
-    if (memoryBox.value.trim() === "") {
-
-        message.textContent =
-            "Write something before submitting.";
-
+    if (memory === "") {
+        message.textContent = "Write something before submitting.";
         return;
     }
 
-    message.textContent =
-        "Thank you. Your memory has been received.";
+    submitButton.disabled = true;
+    submitButton.textContent = "SENDING...";
+
+    const data = {
+        question: questionElement.textContent,
+        memory: memory
+    };
+
+    try {
+
+        await fetch(scriptURL, {
+            method: "POST",
+            mode: "no-cors",
+            body: JSON.stringify(data)
+        });
+
+        message.textContent =
+            "Your memory has been added to the archive.";
+
+        memoryBox.value = "";
+        characterCount.textContent = "0 / 2000";
+
+    } catch (error) {
+
+        message.textContent =
+            "Something went wrong. Please try again.";
+
+        console.error(error);
+
+    }
+
+    submitButton.disabled = false;
+    submitButton.textContent = "SUBMIT MEMORY →";
 
 });

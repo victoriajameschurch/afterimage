@@ -52,86 +52,15 @@
         </section>
 
 
-        <section class="memory-grid">
+        <!-- REAL MEMORIES WILL APPEAR HERE -->
 
-            <article class="memory-card">
+        <section
+            class="memory-grid"
+            id="memory-grid">
 
-                <p class="memory-question">
-                    What is the smallest moment
-                    you remember vividly?
-                </p>
-
-                <p class="memory-text">
-                    I remember sitting in the backseat
-                    while it rained against the window.
-                    I don't remember where we were going.
-                </p>
-
-                <span class="anonymous">
-                    — anonymous
-                </span>
-
-            </article>
-
-
-            <article class="memory-card">
-
-                <p class="memory-question">
-                    Do you think there are other
-                    people somewhere looking at
-                    their own night sky?
-                </p>
-
-                <p class="memory-text">
-                    Probably. I like thinking that
-                    somewhere impossibly far away,
-                    someone is wondering the same thing.
-                </p>
-
-                <span class="anonymous">
-                    — anonymous
-                </span>
-
-            </article>
-
-
-            <article class="memory-card">
-
-                <p class="memory-question">
-                    What makes something meaningful?
-                </p>
-
-                <p class="memory-text">
-                    Maybe the fact that it mattered
-                    to someone, even if it didn't
-                    matter to the rest of the world.
-                </p>
-
-                <span class="anonymous">
-                    — anonymous
-                </span>
-
-            </article>
-
-
-            <article class="memory-card">
-
-                <p class="memory-question">
-                    If your memories were erased,
-                    would you still be you?
-                </p>
-
-                <p class="memory-text">
-                    I think I'd still feel like myself.
-                    Maybe we'd just be strangers
-                    who happen to live in the same body.
-                </p>
-
-                <span class="anonymous">
-                    — anonymous
-                </span>
-
-            </article>
+            <p id="loading">
+                Loading the archive...
+            </p>
 
         </section>
 
@@ -142,13 +71,112 @@
                 Have something worth leaving behind?
             </p>
 
-            <a href="index.html">
+            <a href="index.html#submit">
                 LEAVE A MEMORY →
             </a>
 
         </section>
 
     </main>
+
+
+    <script>
+
+        const scriptURL =
+            "https://script.google.com/macros/s/AKfycbwmIdLX70Mb1JCvqwobJS_AErbhvEqbUak6owPqHPvu_CwPnsdFDXyutujTb--d8XM/exec";
+
+
+        const grid =
+            document.getElementById("memory-grid");
+
+
+        fetch(scriptURL)
+
+            .then(response => response.json())
+
+            .then(memories => {
+
+                grid.innerHTML = "";
+
+
+                if (memories.length === 0) {
+
+                    grid.innerHTML = `
+                        <p>
+                            The archive is still empty.
+                        </p>
+                    `;
+
+                    return;
+                }
+
+
+                memories.reverse().forEach(memory => {
+
+                    const card =
+                        document.createElement("article");
+
+                    card.className = "memory-card";
+
+
+                    const question =
+                        document.createElement("p");
+
+                    question.className =
+                        "memory-question";
+
+                    question.textContent =
+                        memory.question;
+
+
+                    const text =
+                        document.createElement("p");
+
+                    text.className =
+                        "memory-text";
+
+                    text.textContent =
+                        memory.memory;
+
+
+                    const anonymous =
+                        document.createElement("span");
+
+                    anonymous.className =
+                        "anonymous";
+
+                    anonymous.textContent =
+                        "— anonymous";
+
+
+                    card.appendChild(question);
+
+                    card.appendChild(text);
+
+                    card.appendChild(anonymous);
+
+                    grid.appendChild(card);
+
+                });
+
+            })
+
+
+            .catch(error => {
+
+                console.error(error);
+
+                grid.innerHTML = `
+                    <p>
+                        The archive couldn't be loaded.
+                        Please try again later.
+                    </p>
+                `;
+
+            });
+
+    </script>
+
 
 </body>
 

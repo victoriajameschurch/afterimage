@@ -110,30 +110,24 @@ submitButton.addEventListener("click", async function() {
     submitButton.textContent = "SENDING...";
 
 
-    // Create form data
-    const formData = new URLSearchParams();
+    const question =
+        questionElement.textContent;
 
-    formData.append(
-        "question",
-        questionElement.textContent
-    );
 
-    formData.append(
-        "memory",
-        memory
-    );
+    // Put the information into the request URL
+    const submissionURL =
+        scriptURL +
+        "?question=" +
+        encodeURIComponent(question) +
+        "&memory=" +
+        encodeURIComponent(memory);
 
 
     try {
 
-        await fetch(scriptURL, {
-
+        await fetch(submissionURL, {
             method: "POST",
-
-            mode: "no-cors",
-
-            body: formData
-
+            mode: "no-cors"
         });
 
 

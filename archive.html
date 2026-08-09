@@ -26,12 +26,14 @@
         <nav>
             <a href="index.html">HOME</a>
             <a href="archive.html">ARCHIVE</a>
+            <a href="science.html">SCIENCE</a>
         </nav>
 
     </header>
 
 
     <main class="archive">
+
 
         <section class="archive-intro">
 
@@ -49,10 +51,14 @@
                 thought, and existence.
             </p>
 
+            <p id="archive-count"
+               class="section-label"
+               style="margin-top: 35px;">
+                LOADING MEMORIES...
+            </p>
+
         </section>
 
-
-        <!-- REAL MEMORIES WILL APPEAR HERE -->
 
         <section
             class="memory-grid"
@@ -77,6 +83,7 @@
 
         </section>
 
+
     </main>
 
 
@@ -89,6 +96,9 @@
         const grid =
             document.getElementById("memory-grid");
 
+        const countElement =
+            document.getElementById("archive-count");
+
 
         fetch(scriptURL)
 
@@ -97,6 +107,15 @@
             .then(memories => {
 
                 grid.innerHTML = "";
+
+
+                countElement.textContent =
+                    memories.length +
+                    (
+                        memories.length === 1
+                            ? " MEMORY PRESERVED"
+                            : " MEMORIES PRESERVED"
+                    );
 
 
                 if (memories.length === 0) {
@@ -116,7 +135,8 @@
                     const card =
                         document.createElement("article");
 
-                    card.className = "memory-card";
+                    card.className =
+                        "memory-card";
 
 
                     const question =
@@ -165,6 +185,9 @@
             .catch(error => {
 
                 console.error(error);
+
+                countElement.textContent =
+                    "ARCHIVE UNAVAILABLE";
 
                 grid.innerHTML = `
                     <p>
